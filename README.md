@@ -109,4 +109,4 @@ curl http://192.168.64.2:30007
 ![App Access](docs/app-access.jpg)
 
 ### 🔧 Project Structure
-![Project Structure](docs/project-structure.jpg)
+![Project Structure](https://github.com/TempleInCloud/linux-production-server/blob/a87d493abf1a7855e29f6063628879d1fb38ea5c/docs/Project%20Structure.png)
