@@ -1,0 +1,112 @@
+# Linux Production Server with k3s Deployment
+
+## 🚀 Project Overview
+
+This project demonstrates how to provision and configure a production-ready Linux server, automate system setup, and deploy containerized applications using k3s (lightweight Kubernetes).
+
+It showcases core platform engineering practices including system hardening, automation, container orchestration, and service exposure.
+
+---
+
+## 🔧 What This Project Covers
+
+- Linux server setup and configuration
+- User and permission management
+- System hardening (basic security practices)
+- Bash scripting for automation
+- Docker installation and container runtime setup
+- k3s (lightweight Kubernetes) installation
+- Kubernetes resource deployment
+- Service exposure using NodePort
+- Git version control and GitHub integration
+
+---
+
+## 🏗️ Architecture
+
+The application flow follows a simple Kubernetes service exposure model:
+
+- **Client** sends request to server IP and NodePort  
+- **NodePort** exposes the service externally  
+- **Service** routes traffic inside the cluster  
+- **Pod** runs the Nginx container serving content
+
+## 📁 Project Structure
+
+```
+linux-production-server/
+├── docs/
+│   ├── security-setup.log
+│   └── users-setup.log
+│
+├── scripts/
+│   ├── base.sh                  # Base system setup
+│   ├── docker.sh                # Docker installation
+│   ├── k3s.sh                   # Kubernetes (k3s) setup
+│   ├── users.sh                 # User creation & permissions
+│   ├── security.sh              # Server hardening
+│   ├── nginx-nodeport.yaml      # Kubernetes NodePort service
+│   ├── nginx-route.yaml         # Gateway API route (experimental)
+│   └── web-gateway.yaml         # Gateway configuration
+```
+---
+
+## ⚙️ Setup Steps
+
+### 1. Server Preparation
+- Provision Ubuntu server
+- Update system packages
+
+### 2. User & Security Setup
+- Create a non-root user
+- Configure permissions
+- Apply basic hardening
+
+### 3. Install Docker
+Run the Docker setup script:
+bash scripts/docker.sh
+
+### 4. Install k3s
+Run the Kubernetes setup script:
+bash scripts/k3s.sh
+
+### 5. Deploy Application (Nginx)
+Create the deployment:
+```
+sudo k3s kubectl create deployment nginx --image=nginx
+```
+
+Expose using NodePort:
+```
+sudo k3s kubectl expose deployment nginx --type=NodePort --port=80
+```
+
+### 6. Verify Deployment
+Check pods:
+```
+sudo k3s kubectl get pods
+```
+
+Check services:
+```
+sudo k3s kubectl get svc
+```
+
+### 7. Access Application
+```
+curl http://192.168.64.2:30007
+```
+
+## 📸 Screenshots
+
+### 🚀 Nginx Deployment Running
+![Nginx Deployment](docs/nginx-running.jpg)
+
+### 📦 Kubernetes Resources
+![Pods and Services](docs/k8s-resources.jpg)
+
+### 🌐 Application Access (NodePort)
+![App Access](docs/app-access.jpg)
+
+### 🔧 Project Structure
+![Project Structure](docs/project-structure.jpg)
