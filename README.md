@@ -103,7 +103,7 @@ curl http://192.168.64.2:30007
 ![Nginx Deployment](https://github.com/TempleInCloud/linux-production-server/blob/a10b3a46d96cef34f5a0a2076e28bbebbb8c40bd/docs/application%20access.png)
 
 ### 📦 Kubernetes Resources
-![Pods and Services](docs/k8s-resources.jpg)
+![Pods and Services](https://github.com/TempleInCloud/linux-production-server/blob/da811cd41990592ada2e5bae8733f58cc074cfdd/docs/kubernetes%20resources%201.png)
 
 ### 🔧 Project Structure
 ![Project Structure](https://github.com/TempleInCloud/linux-production-server/blob/a87d493abf1a7855e29f6063628879d1fb38ea5c/docs/Project%20Structure.png)
