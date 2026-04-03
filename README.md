@@ -100,13 +100,10 @@ curl http://192.168.64.2:30007
 ## 📸 Screenshots
 
 ### 🚀 Nginx Deployment Running
-![Nginx Deployment](docs/nginx-running.jpg)
+![Nginx Deployment](https://github.com/TempleInCloud/linux-production-server/blob/a10b3a46d96cef34f5a0a2076e28bbebbb8c40bd/docs/application%20access.png)
 
 ### 📦 Kubernetes Resources
 ![Pods and Services](docs/k8s-resources.jpg)
-
-### 🌐 Application Access (NodePort)
-![App Access](docs/app-access.jpg)
 
 ### 🔧 Project Structure
 ![Project Structure](https://github.com/TempleInCloud/linux-production-server/blob/a87d493abf1a7855e29f6063628879d1fb38ea5c/docs/Project%20Structure.png)
