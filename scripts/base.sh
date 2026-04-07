@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash/
 
 set -euo pipefail
 LOG_FILE="$HOME/linux-production-server/docs/base-setup.log"
