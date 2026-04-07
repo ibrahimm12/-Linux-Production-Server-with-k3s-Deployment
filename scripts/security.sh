@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 LOG_FILE="$HOME/linux-production-server/docs/security-setup.log"
 
