@@ -20,7 +20,7 @@ if id "$USERNAME" >/dev/null 2>&1; then
   log "User $USERNAME already exists. Skipping creation."
 else
   log "Creating user $USERNAME..."
-  sudo adduser --disabled-password--gecos "" "USERNAME"
+  sudo adduser --disabled-password --gecos "" "$USERNAME"
 fi
 
 if groups "$USERNAME" | grep -q '\bsudo\b';

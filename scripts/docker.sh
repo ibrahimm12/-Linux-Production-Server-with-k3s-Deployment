@@ -22,25 +22,25 @@ sudo apt update -y 2>&1 | tee -a "$LOG_FILE"
 sudo apt install -y ca-certificates curl gnupg 2>&1 | tee -a "$LOG_FILE"
 
 log "Adding Docker GPG key..."
-sudo mkdir -p /etc/apt/keystrings
-sudo chmod 755 /etc/apt/keystrings
+sudo mkdir -p /etc/apt/keyrings
+sudo chmod 755 /etc/apt/keyrings
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
-sudo gpg --dearmor -o /etc/apt/keystrings/docker.gpg
+sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
 log "Setting up Docker repository..."
 echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keystrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 log "Installing Docker Engine..."
 sudo apt update -y 2>&1 | tee -a "$LOG_FILE"
-sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>&1 | tee -a "LOG_FILE"
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin 2>&1 | tee -a "$LOG_FILE"
 
 log "Starting and enabling Docker..."
 sudo systemctl start docker
 sudo systemctl enable docker
 
-log "Adding user to dicker group..."
+log "Adding user to docker group..."
 sudo usermod -aG docker "$USER"
 
 log "Docker setup complete." 

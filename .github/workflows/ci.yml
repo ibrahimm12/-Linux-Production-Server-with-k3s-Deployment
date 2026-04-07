@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y shellcheck yamllint curl
+
+          KUBECONFORM_VERSION="v0.6.7"
+          curl -sSL "https://github.com/yannh/kubeconform/releases/download/${KUBECONFORM_VERSION}/kubeconform-linux-amd64.tar.gz" \
+            | tar -xz kubeconform
+          sudo install -m 0755 kubeconform /usr/local/bin/kubeconform
+
+      - name: Lint shell scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          shellcheck scripts/*.sh
+
+      - name: Lint YAML
+        shell: bash
+        run: |
+          set -euo pipefail
+          yamllint -c .yamllint .
+
+      - name: Validate Kubernetes manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          find scripts -maxdepth 1 -type f -name '*.yaml' -print0 | \
+            xargs -0 -r kubeconform -summary -strict -ignore-missing-schemas

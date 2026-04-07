@@ -30,12 +30,12 @@ sudo sed -i 's/^#\?PermitRootLogin.*/PermitRootLogin no/' "$SSH_CONFIG"
 sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' "$SSH_CONFIG"
 sudo sed -i 's/^#\?PubkeyAuthentication.*/PubkeyAuthentication yes/' "$SSH_CONFIG"
 
-if ! grep -q '^PasswordAuthentication yes' "$SSH_CONFIG"; then
+if ! grep -q '^PubkeyAuthentication yes' "$SSH_CONFIG"; then
   echo 'PubkeyAuthentication yes' | sudo tee -a "$SSH_CONFIG"
 fi
 
 log "Restarting SSH service..."
-sudo systemctl restart ssh 2>&1 | tee -a "LOG_FILE"
+sudo systemctl restart ssh 2>&1 | tee -a "$LOG_FILE"
 
 log "Allowing required firewall ports..."
 sudo ufw allow OpenSSH 2>&1 | tee -a "$LOG_FILE"
